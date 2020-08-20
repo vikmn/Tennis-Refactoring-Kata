@@ -14,23 +14,14 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        int tempScore = 0;
+        int tempScore;
         if (scorePlayer1 == scorePlayer2) {
-            switch (scorePlayer1) {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-
-            }
+            score = switch (scorePlayer1) {
+                case 0 -> "Love-All";
+                case 1 -> "Fifteen-All";
+                case 2 -> "Thirty-All";
+                default -> "Deuce";
+            };
         } else if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
             int minusResult = scorePlayer1 - scorePlayer2;
             if (minusResult == 1) score = "Advantage player1";
