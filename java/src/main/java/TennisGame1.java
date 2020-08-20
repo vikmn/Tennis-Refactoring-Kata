@@ -59,10 +59,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isAdvantage() {
-        if (isEitherPlayerAboveForty()) {
-            return Math.abs(getScoreDistance()) == 1;
-        }
-        return false;
+        return isEitherPlayerAboveForty() && Math.abs(getScoreDistance()) == 1;
     }
 
     private boolean isWin() {
@@ -88,7 +85,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String displayTie() {
-        if(tieDictionary.containsKey(scorePlayer1)){
+        if (tieDictionary.containsKey(scorePlayer1)) {
             return tieDictionary.get(scorePlayer1);
         }
         return DEUCE;
