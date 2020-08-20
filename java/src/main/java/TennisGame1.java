@@ -10,11 +10,12 @@ public class TennisGame1 implements TennisGame {
         put(3, "Forty");
     }};
 
+    private static final String DEUCE = "Deuce";
     private static final Map<Integer, String> tieDictionary = new HashMap<>() {{
         put(0, "Love-All");
         put(1, "Fifteen-All");
         put(2, "Thirty-All");
-        put(3, "Deuce");
+        put(3, DEUCE);
     }};
 
     private static final String PLAYER_1 = "player1";
@@ -90,7 +91,7 @@ public class TennisGame1 implements TennisGame {
         if(tieDictionary.containsKey(scorePlayer1)){
             return tieDictionary.get(scorePlayer1);
         }
-        return "Deuce";
+        return DEUCE;
     }
 
     private boolean isTie() {
