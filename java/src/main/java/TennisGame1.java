@@ -63,10 +63,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isWin() {
-        if (isEitherPlayerAboveForty()) {
-            return Math.abs(getScoreDistance()) > 1;
-        }
-        return false;
+        return isEitherPlayerAboveForty() && Math.abs(getScoreDistance()) > 1;
     }
 
     private String displayRunning() {
