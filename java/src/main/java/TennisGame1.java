@@ -1,5 +1,14 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
+
+    private static final Map<Integer,String> scoreDictionary = new HashMap<>(){{
+        put(0, "Love");
+        put(1, "Fifteen");
+        put(2, "Thirty");
+        put(3, "Forty");
+    }};
 
     private static final String PLAYER_1 = "player1";
     private static final String PLAYER_2 = "player2";
@@ -46,12 +55,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getScoreString(int score) {
-        return switch (score) {
-            case 0 -> "Love";
-            case 1 -> "Fifteen";
-            case 2 -> "Thirty";
-            case 3 -> "Forty";
-            default -> "";
-        };
+        return scoreDictionary.get(score);
     }
 }
