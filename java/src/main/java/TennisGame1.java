@@ -30,7 +30,7 @@ public class TennisGame1 implements TennisGame {
         if (isAdvantage()) {
             return displayAdvantage();
         }
-        if (isEitherPlayerAboveForty()) {
+        if (isWin()) {
             return displayWin();
         }
 
@@ -48,6 +48,13 @@ public class TennisGame1 implements TennisGame {
     private boolean isAdvantage() {
         if (isEitherPlayerAboveForty()) {
             return Math.abs(scorePlayer1 - scorePlayer2) == 1;
+        }
+        return false;
+    }
+
+    private boolean isWin() {
+        if (isEitherPlayerAboveForty()) {
+            return Math.abs(scorePlayer1 - scorePlayer2) > 1;
         }
         return false;
     }
