@@ -38,20 +38,20 @@ public class TennisGame1 implements TennisGame {
             }
             return  "Win for " + PLAYER_2;
         }
-        switch (scorePlayer1) {
-            case 0 -> score += "Love";
-            case 1 -> score += "Fifteen";
-            case 2 -> score += "Thirty";
-            case 3 -> score += "Forty";
-        }
+        score = getScoreString(scorePlayer1);
         score += "-";
-        switch (scorePlayer2) {
-            case 0 -> score += "Love";
-            case 1 -> score += "Fifteen";
-            case 2 -> score += "Thirty";
-            case 3 -> score += "Forty";
-        }
+        score += getScoreString(scorePlayer2);
 
         return score;
+    }
+
+    private String getScoreString(int score) {
+        return switch (score) {
+            case 0 -> "Love";
+            case 1 -> "Fifteen";
+            case 2 -> "Thirty";
+            case 3 -> "Forty";
+            default -> "";
+        };
     }
 }
