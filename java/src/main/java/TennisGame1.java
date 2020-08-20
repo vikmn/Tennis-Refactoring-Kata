@@ -10,8 +10,17 @@ public class TennisGame1 implements TennisGame {
         put(3, "Forty");
     }};
 
+    private static final Map<Integer, String> tieDictionary = new HashMap<>() {{
+        put(0, "Love-All");
+        put(1, "Fifteen-All");
+        put(2, "Thirty-All");
+        put(3, "Deuce");
+    }};
+
     private static final String PLAYER_1 = "player1";
     private static final String PLAYER_2 = "player2";
+    private static final String WIN_FOR = "Win for ";
+    private static final String ADVANTAGE = "Advantage ";
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
 
@@ -38,23 +47,26 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String displayAdvantage() {
-        int minusResult = scorePlayer1 - scorePlayer2;
-        if (minusResult == 1) {
-            return "Advantage " + PLAYER_1;
+        if (getScoreDistance() == 1) {
+            return ADVANTAGE + PLAYER_1;
         }
-        return "Advantage " + PLAYER_2;
+        return ADVANTAGE + PLAYER_2;
+    }
+
+    private int getScoreDistance() {
+        return scorePlayer1 - scorePlayer2;
     }
 
     private boolean isAdvantage() {
         if (isEitherPlayerAboveForty()) {
-            return Math.abs(scorePlayer1 - scorePlayer2) == 1;
+            return Math.abs(getScoreDistance()) == 1;
         }
         return false;
     }
 
     private boolean isWin() {
         if (isEitherPlayerAboveForty()) {
-            return Math.abs(scorePlayer1 - scorePlayer2) > 1;
+            return Math.abs(getScoreDistance()) > 1;
         }
         return false;
     }
@@ -64,11 +76,10 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String displayWin() {
-        int minusResult = scorePlayer1 - scorePlayer2;
-        if (minusResult >= 2) {
-            return "Win for " + PLAYER_1;
+        if (getScoreDistance() >= 2) {
+            return WIN_FOR + PLAYER_1;
         }
-        return "Win for " + PLAYER_2;
+        return WIN_FOR + PLAYER_2;
     }
 
     private boolean isEitherPlayerAboveForty() {
@@ -76,14 +87,10 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String displayTie() {
-        String score;
-        score = switch (scorePlayer1) {
-            case 0 -> "Love-All";
-            case 1 -> "Fifteen-All";
-            case 2 -> "Thirty-All";
-            default -> "Deuce";
-        };
-        return score;
+        if(tieDictionary.containsKey(scorePlayer1)){
+            return tieDictionary.get(scorePlayer1);
+        }
+        return "Deuce";
     }
 
     private boolean isTie() {
