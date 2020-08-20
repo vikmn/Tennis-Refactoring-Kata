@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
 
-    private static final Map<Integer,String> scoreDictionary = new HashMap<>(){{
+    private static final Map<Integer, String> scoreDictionary = new HashMap<>() {{
         put(0, "Love");
         put(1, "Fifteen");
         put(2, "Thirty");
@@ -27,10 +27,29 @@ public class TennisGame1 implements TennisGame {
         if (isTie()) {
             return displayTie();
         }
+        if (isAdvantage()) {
+            return displayAdvantage();
+        }
         if (isAdvantageOrWin()) {
             return displayAdvantageOrWin();
         }
+
         return displayRunning();
+    }
+
+    private String displayAdvantage() {
+        int minusResult = scorePlayer1 - scorePlayer2;
+        if (minusResult == 1) {
+            return "Advantage " + PLAYER_1;
+        }
+        return "Advantage " + PLAYER_2;
+    }
+
+    private boolean isAdvantage() {
+        if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
+            return Math.abs(scorePlayer1 - scorePlayer2) == 1;
+        }
+        return false;
     }
 
     private String displayRunning() {
@@ -46,9 +65,9 @@ public class TennisGame1 implements TennisGame {
             return "Advantage " + PLAYER_2;
         }
         if (minusResult >= 2) {
-            return  "Win for " + PLAYER_1;
+            return "Win for " + PLAYER_1;
         }
-        return  "Win for " + PLAYER_2;
+        return "Win for " + PLAYER_2;
     }
 
     private boolean isAdvantageOrWin() {
