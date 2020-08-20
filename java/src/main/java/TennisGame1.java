@@ -24,34 +24,54 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        if (scorePlayer1 == scorePlayer2) {
-            score = switch (scorePlayer1) {
-                case 0 -> "Love-All";
-                case 1 -> "Fifteen-All";
-                case 2 -> "Thirty-All";
-                default -> "Deuce";
-            };
-            return score;
+        if (isTie()) {
+            return displayTie();
         }
-        if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
-            int minusResult = scorePlayer1 - scorePlayer2;
-            if (minusResult == 1) {
-                return "Advantage " + PLAYER_1;
-            }
-            if (minusResult == -1) {
-                return "Advantage " + PLAYER_2;
-            }
-            if (minusResult >= 2) {
-                return  "Win for " + PLAYER_1;
-            }
-            return  "Win for " + PLAYER_2;
+        if (isAdvantageOrWin()) {
+            return displayAdvantageOrWin();
         }
+        return displayRunning();
+    }
+
+    private String displayRunning() {
+        String score;
         score = getScoreString(scorePlayer1);
         score += "-";
         score += getScoreString(scorePlayer2);
-
         return score;
+    }
+
+    private String displayAdvantageOrWin() {
+        int minusResult = scorePlayer1 - scorePlayer2;
+        if (minusResult == 1) {
+            return "Advantage " + PLAYER_1;
+        }
+        if (minusResult == -1) {
+            return "Advantage " + PLAYER_2;
+        }
+        if (minusResult >= 2) {
+            return  "Win for " + PLAYER_1;
+        }
+        return  "Win for " + PLAYER_2;
+    }
+
+    private boolean isAdvantageOrWin() {
+        return scorePlayer1 >= 4 || scorePlayer2 >= 4;
+    }
+
+    private String displayTie() {
+        String score;
+        score = switch (scorePlayer1) {
+            case 0 -> "Love-All";
+            case 1 -> "Fifteen-All";
+            case 2 -> "Thirty-All";
+            default -> "Deuce";
+        };
+        return score;
+    }
+
+    private boolean isTie() {
+        return scorePlayer1 == scorePlayer2;
     }
 
     private String getScoreString(int score) {
