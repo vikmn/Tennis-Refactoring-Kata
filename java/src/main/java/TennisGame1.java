@@ -34,11 +34,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String displayRunning() {
-        String score;
-        score = getScoreString(scorePlayer1);
-        score += "-";
-        score += getScoreString(scorePlayer2);
-        return score;
+        return getScoreString(scorePlayer1) + "-" + getScoreString(scorePlayer2);
     }
 
     private String displayAdvantageOrWin() {
