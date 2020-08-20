@@ -30,8 +30,8 @@ public class TennisGame1 implements TennisGame {
         if (isAdvantage()) {
             return displayAdvantage();
         }
-        if (isAdvantageOrWin()) {
-            return displayAdvantageOrWin();
+        if (isEitherPlayerAboveForty()) {
+            return displayWin();
         }
 
         return displayRunning();
@@ -46,7 +46,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isAdvantage() {
-        if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
+        if (isEitherPlayerAboveForty()) {
             return Math.abs(scorePlayer1 - scorePlayer2) == 1;
         }
         return false;
@@ -56,21 +56,15 @@ public class TennisGame1 implements TennisGame {
         return getScoreString(scorePlayer1) + "-" + getScoreString(scorePlayer2);
     }
 
-    private String displayAdvantageOrWin() {
+    private String displayWin() {
         int minusResult = scorePlayer1 - scorePlayer2;
-        if (minusResult == 1) {
-            return "Advantage " + PLAYER_1;
-        }
-        if (minusResult == -1) {
-            return "Advantage " + PLAYER_2;
-        }
         if (minusResult >= 2) {
             return "Win for " + PLAYER_1;
         }
         return "Win for " + PLAYER_2;
     }
 
-    private boolean isAdvantageOrWin() {
+    private boolean isEitherPlayerAboveForty() {
         return scorePlayer1 >= 4 || scorePlayer2 >= 4;
     }
 
